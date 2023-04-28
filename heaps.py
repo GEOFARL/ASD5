@@ -1,7 +1,7 @@
 import random
 
-def findMedian(A):
-  print(A)
+def findMedian(A, minHeap, maxHeap):
+  pass
 
 def parent(i):
   return i // 2
