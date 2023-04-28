@@ -42,6 +42,8 @@ def maxHeapInsert(A, key):
   A.append(float('-inf'))
   heapIncreaseKey(A, len(A) - 1, key)
 
+def heapMaximum(A):
+  return A[0]
 
 if __name__ == "__main__":
   A = list(range(1, 11))
