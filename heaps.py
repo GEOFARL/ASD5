@@ -29,9 +29,20 @@ def buildMaxHeap(A):
   for i in range(len(A) // 2, -1, -1):
     maxHeapify(A, i, len(A))
 
+
+def heapIncreaseKey(A, i, key):
+  if key < A[i]:
+    return
+  A[i] = key
+  while i > 0 and A[parent(i)] < A[i]:
+    [A[i], A[parent(i)]] = [A[parent(i)], A[i]]
+    i = parent(i)
+
+
 if __name__ == "__main__":
   A = list(range(1, 11))
   random.shuffle(A)
   print(A)
   buildMaxHeap(A)
+  heapIncreaseKey(A, 9, 12)
   print(A)
