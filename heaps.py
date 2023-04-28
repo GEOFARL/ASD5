@@ -38,6 +38,10 @@ def heapIncreaseKey(A, i, key):
     [A[i], A[parent(i)]] = [A[parent(i)], A[i]]
     i = parent(i)
 
+def maxHeapInsert(A, key):
+  A.append(float('-inf'))
+  heapIncreaseKey(A, len(A) - 1, key)
+
 
 if __name__ == "__main__":
   A = list(range(1, 11))
@@ -45,4 +49,6 @@ if __name__ == "__main__":
   print(A)
   buildMaxHeap(A)
   heapIncreaseKey(A, 9, 12)
+  print(A)
+  maxHeapInsert(A, 11)
   print(A)
