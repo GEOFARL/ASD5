@@ -1,7 +1,29 @@
 import random
 
 def findMedian(A, minHeap, maxHeap):
-  pass
+    
+  if (A[-1] > heapMaximum(maxHeap)):
+    maxHeapInsert(maxHeap, A[-1])
+  else:
+    minHeapInsert(minHeap, A[-1])
+
+  if len(minHeap) - len(maxHeap) > 1:
+    el = max(minHeap)
+    minHeap.remove(el)
+    maxHeapInsert(maxHeap, el)
+  elif len(maxHeap) - len(minHeap) > 1:
+    el = min(maxHeap)
+    maxHeap.remove(el)
+    minHeapInsert(minHeap, el)
+  
+  print(minHeap)
+  print(maxHeap)
+  print()
+  if len(A) % 2 != 0:
+    return str(maxHeap[-1])
+  else:
+    return f'{maxHeap[-1]} {minHeap[-1]}'
+  
 
 def parent(i):
   return i // 2
