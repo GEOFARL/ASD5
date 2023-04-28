@@ -25,9 +25,26 @@ def maxHeapify(A, i, N):
     [A[i], A[largest]] = [A[largest], A[i]]
     maxHeapify(A, largest, N)
 
+def minHeapify(A, i, N):
+  p = left(i)
+  q = right(i)
+  if p < N and A[p] < A[i]:
+    smallest = p
+  else:
+    smallest = i
+  if q < N and A[q] < A[smallest]:
+    smallest = q
+  if smallest != i:
+    [A[i], A[smallest]] = [A[smallest], A[i]]
+    minHeapify(A, smallest, N)
+
 def buildMaxHeap(A):
   for i in range(len(A) // 2, -1, -1):
     maxHeapify(A, i, len(A))
+
+def buildMinHeap(A):
+  for i in range(len(A) // 2, -1, -1):
+    minHeapify(A, i, len(A))
 
 
 def heapIncreaseKey(A, i, key):
@@ -38,11 +55,26 @@ def heapIncreaseKey(A, i, key):
     [A[i], A[parent(i)]] = [A[parent(i)], A[i]]
     i = parent(i)
 
+def heapDecreaseKey(A, i, key):
+  if key > A[i]:
+    return
+  A[i] = key
+  while i > 0 and A[parent(i)] > A[i]:
+    [A[i], A[parent(i)]] = [A[parent(i)], A[i]]
+    i = parent(i)
+
 def maxHeapInsert(A, key):
   A.append(float('-inf'))
   heapIncreaseKey(A, len(A) - 1, key)
 
+def minHeapInsert(A, key):
+  A.append(float('inf'))
+  heapDecreaseKey(A, len(A) - 1, key)
+
 def heapMaximum(A):
+  return A[0]
+
+def heapMinimum(A):
   return A[0]
 
 if __name__ == "__main__":
@@ -53,4 +85,8 @@ if __name__ == "__main__":
   heapIncreaseKey(A, 9, 12)
   print(A)
   maxHeapInsert(A, 11)
+  print(A)
+  buildMinHeap(A)
+  print(A)
+  minHeapInsert(A, 0)
   print(A)
