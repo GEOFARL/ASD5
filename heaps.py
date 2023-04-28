@@ -99,6 +99,22 @@ def heapMaximum(A):
 def heapMinimum(A):
   return A[0]
 
+def heapExtractMax(A):
+  if len(A) < 1:
+    return
+  max = A[0]
+  A[0] = A[len(A) - 1]
+  maxHeapify(A, 0, len(A))
+  return max
+
+def heapExtractMin(A):
+  if len(A) < 1:
+    return
+  min = A[0]
+  A[0] = A[len(A) - 1]
+  minHeapify(A, 0, len(A))
+  return min
+
 if __name__ == "__main__":
   A = list(range(1, 11))
   random.shuffle(A)
@@ -106,9 +122,11 @@ if __name__ == "__main__":
   buildMaxHeap(A)
   heapIncreaseKey(A, 9, 12)
   print(A)
+  print(heapExtractMax(A))
   maxHeapInsert(A, 11)
   print(A)
   buildMinHeap(A)
+  print(heapExtractMin(A))
   print(A)
   minHeapInsert(A, 0)
   print(A)
