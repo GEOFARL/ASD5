@@ -1,3 +1,5 @@
+import random
+
 def findMedian(A):
   print(A)
 
@@ -22,3 +24,14 @@ def maxHeapify(A, i, N):
   if largest != i:
     [A[i], A[largest]] = [A[largest], A[i]]
     maxHeapify(A, largest, N)
+
+def buildMaxHeap(A):
+  for i in range(len(A) // 2, -1, -1):
+    maxHeapify(A, i, len(A))
+
+if __name__ == "__main__":
+  A = list(range(1, 11))
+  random.shuffle(A)
+  print(A)
+  buildMaxHeap(A)
+  print(A)
