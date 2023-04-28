@@ -1,7 +1,27 @@
 import random
 
 def findMedian(A, minHeap, maxHeap):
-  pass
+    
+  if (A[-1] < heapMaximum(maxHeap)):
+    maxHeapInsert(maxHeap, A[-1])
+  else:
+    minHeapInsert(minHeap, A[-1])
+
+  if len(maxHeap) - len(minHeap) > 1:
+    el = heapExtractMax(maxHeap)
+    minHeapInsert(minHeap, el)
+  elif len(minHeap) - len(maxHeap) > 1:
+    el = heapExtractMin(minHeap)
+    maxHeapInsert(maxHeap, el)
+
+  if len(A) % 2 != 0:
+    if len(maxHeap) > len(minHeap):
+      return str(maxHeap[0])
+    else:
+       return str(minHeap[0])
+  else:
+    return f'{maxHeap[0]} {minHeap[0]}'
+  
 
 def parent(i):
   return i // 2
@@ -77,16 +97,20 @@ def heapMaximum(A):
 def heapMinimum(A):
   return A[0]
 
-if __name__ == "__main__":
-  A = list(range(1, 11))
-  random.shuffle(A)
-  print(A)
-  buildMaxHeap(A)
-  heapIncreaseKey(A, 9, 12)
-  print(A)
-  maxHeapInsert(A, 11)
-  print(A)
-  buildMinHeap(A)
-  print(A)
-  minHeapInsert(A, 0)
-  print(A)
+def heapExtractMax(A):
+  if len(A) < 1:
+    return
+  max = A[0]
+  A[0] = A[len(A) - 1]
+  A.pop()
+  maxHeapify(A, 0, len(A))
+  return max
+
+def heapExtractMin(A):
+  if len(A) < 1:
+    return
+  min = A[0]
+  A[0] = A[len(A) - 1]
+  A.pop()
+  minHeapify(A, 0, len(A))
+  return min
